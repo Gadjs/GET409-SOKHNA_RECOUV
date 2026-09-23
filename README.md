@@ -1,4 +1,4 @@
-# Ndimbal — Assistant client multicanal NSIA Vie
+# GET409-SOKHNA_RECOUV — Ndimbal, assistant client multicanal NSIA Vie
 
 *Ndimbal* signifie « aide » en wolof.
 
@@ -36,7 +36,7 @@ Détails : [docs/canaux.md](docs/canaux.md) · Parcours J-3 → J+30 : [docs/par
 ## Structure du dépôt
 
 ```
-ndimbal-nsia/
+GET409-SOKHNA_RECOUV/
 ├── README.md
 ├── fiche-equipe.md
 ├── carte-empathie.md            (S1)
