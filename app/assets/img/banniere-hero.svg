@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Emplacement de la photo de banniere">
+  <rect x="1" y="1" width="798" height="598" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="2" stroke-dasharray="10 6"/>
+  <text x="400" y="290" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" fill="#94A3B8">PHOTO DE BANNIERE</text>
+  <text x="400" y="326" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#B0BEC9">a remplacer par l'image jointe</text>
+</svg>

@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ndimbal — espace agent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<div class="proto-bar">Prototype académique – GET409 Swiss UMEF – non officiel · connexion simulée, Supabase non connecté</div>
+
+<div class="agent-shell">
+
+  <div class="agent-login" id="agent-login-screen">
+    <div class="agent-login-box">
+      <span class="brand"><img src="assets/img/logo-nsia.svg" alt="Logo NSIA Vie Assurances" loading="lazy"><span>Ndimbal</span></span>
+      <p style="text-align:center;color:var(--color-muted);font-size:.88rem;margin:-6px 0 4px">Espace agent — recouvrement</p>
+      <form id="agent-login-form">
+        <div class="field">
+          <label for="agent-email">E-mail</label>
+          <input type="email" id="agent-email" required autocomplete="username">
+        </div>
+        <div class="field">
+          <label for="agent-password">Mot de passe</label>
+          <input type="password" id="agent-password" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%">Se connecter</button>
+      </form>
+      <p class="demo-note">Démo : n'importe quel e-mail et mot de passe ouvrent le tableau de bord. L'authentification réelle nécessite Supabase.</p>
+    </div>
+  </div>
+
+  <div id="agent-dashboard" style="display:none">
+
+    <div class="agent-topbar">
+      <div class="container">
+        <a class="brand" href="index.html">
+          <img src="assets/img/logo-nsia.svg" alt="Logo NSIA Vie Assurances" loading="lazy">
+          <span>Ndimbal — Espace agent</span>
+        </a>
+        <button class="btn btn-ghost btn-sm" id="agent-logout">Se déconnecter</button>
+      </div>
+    </div>
+
+    <main class="agent-main container">
+
+      <span class="demo-note" style="margin-bottom:20px;display:inline-block">Données de démonstration</span>
+
+      <div class="agent-counters">
+        <div class="counter-card">
+          <div class="valeur" id="compteur-a-traiter">0</div>
+          <div class="label">Demandes à traiter</div>
+        </div>
+        <div class="counter-card">
+          <div class="valeur" id="compteur-en-cours">0</div>
+          <div class="label">Promesses en cours</div>
+        </div>
+        <div class="counter-card">
+          <div class="valeur" id="compteur-depassees">0</div>
+          <div class="label">Promesses dépassées</div>
+        </div>
+        <div class="counter-card">
+          <div class="valeur" id="compteur-clics">0</div>
+          <div class="label">Clics « Payer » cette semaine</div>
+        </div>
+      </div>
+
+      <div class="agent-toolbar">
+        <div class="agent-filters">
+          <select id="agent-filter-type">
+            <option value="tous">Tous les types</option>
+            <option value="consultation">Consultation</option>
+            <option value="payer">Clic « Payer »</option>
+            <option value="promesse">Promesse</option>
+            <option value="contact">Demande de contact</option>
+          </select>
+          <select id="agent-filter-police">
+            <option value="toutes">Toutes les polices</option>
+          </select>
+          <select id="agent-filter-periode">
+            <option value="7">7 derniers jours</option>
+            <option value="30">30 derniers jours</option>
+            <option value="tout" selected>Toute la période</option>
+          </select>
+        </div>
+        <button class="btn btn-outline btn-sm" id="agent-export">Exporter en CSV</button>
+      </div>
+
+      <div class="table-wrap agent-table">
+        <table class="agent" id="agent-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Client</th>
+              <th>Police</th>
+              <th>Type</th>
+              <th>Détail</th>
+              <th>Info</th>
+              <th>Statut</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+    </main>
+  </div>
+
+</div>
+
+<script src="assets/js/app.js"></script>
+</body>
+</html>

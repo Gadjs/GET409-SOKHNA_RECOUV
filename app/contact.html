@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ndimbal — contact</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<div class="proto-bar">Prototype académique – GET409 Swiss UMEF – non officiel</div>
+
+<header class="site">
+  <div class="container site-header-inner">
+    <a class="brand" href="index.html">
+      <img src="assets/img/logo-nsia.svg" alt="Logo NSIA Vie Assurances" loading="lazy">
+      <span>Ndimbal</span>
+    </a>
+    <nav class="main-nav" aria-label="Navigation principale">
+      <a href="index.html">Accueil</a>
+      <a href="cotisations.html">Mes cotisations</a>
+      <a href="contact.html" aria-current="page">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <a class="btn btn-primary" href="contact.html">Contactez-nous !</a>
+      <button class="burger" aria-label="Ouvrir le menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu">
+  <div class="mobile-menu__backdrop"></div>
+  <div class="mobile-menu__panel">
+    <div class="mobile-menu__head">
+      <span class="brand"><img src="assets/img/logo-nsia.svg" alt="Logo NSIA Vie Assurances" loading="lazy"><span>Ndimbal</span></span>
+      <button class="mobile-menu__close" aria-label="Fermer le menu">&times;</button>
+    </div>
+    <nav aria-label="Navigation mobile">
+      <a href="index.html">Accueil</a>
+      <a href="cotisations.html">Mes cotisations</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <a class="btn btn-primary" href="contact.html">Contactez-nous !</a>
+  </div>
+</div>
+
+<div class="page-banner">
+  <img src="assets/img/banniere-hero.svg" alt="Emplacement de la photo de bannière : une cliente NSIA consultant son contrat" loading="lazy">
+  <div class="page-banner__veil"></div>
+  <div class="page-banner__content container">
+    <p class="breadcrumb"><a href="index.html">Accueil</a> &gt; Contact</p>
+    <h1>Contact</h1>
+  </div>
+</div>
+
+<main class="section">
+  <div class="container">
+    <div class="contact-grid">
+
+      <form id="contact-form" class="reveal" novalidate>
+        <div class="field">
+          <label for="nom">Nom complet</label>
+          <input type="text" id="nom" name="nom" required autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" required autocomplete="email">
+        </div>
+        <div class="field">
+          <label for="telephone">Téléphone</label>
+          <input type="tel" id="telephone" name="telephone" required autocomplete="tel">
+        </div>
+        <div class="field">
+          <label for="police">Numéro de police <span class="optional">(optionnel)</span></label>
+          <input type="text" id="police" name="police" placeholder="Ex. POL004">
+        </div>
+        <fieldset class="field">
+          <legend>Me répondre par</legend>
+          <div class="radio-row">
+            <label><input type="radio" name="canal" value="sms" checked> SMS</label>
+            <label><input type="radio" name="canal" value="appel"> Appel</label>
+            <label><input type="radio" name="canal" value="vocal-wolof"> Vocal wolof</label>
+            <label><input type="radio" name="canal" value="email"> E-mail</label>
+          </div>
+        </fieldset>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Envoyer ma demande</button>
+      </form>
+
+      <aside class="contact-side reveal">
+        <h3>NSIA Vie Assurances Sénégal</h3>
+        <p>Mermoz, Pyrotechnie N°75A, Dakar</p>
+        <p>+221 33 889 60 20</p>
+      </aside>
+
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="assets/img/logo-nsia.svg" alt="Logo NSIA Vie Assurances" loading="lazy">
+        <address>NSIA Vie Assurances Sénégal<br>Mermoz, Pyrotechnie N°75A, Dakar</address>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p>+221 33 889 60 20</p>
+      </div>
+      <div>
+        <h4>Liens</h4>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="cotisations.html">Mes cotisations</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Réseaux sociaux</h4>
+        <ul>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 NDIMBAL_NSIA – prototype non officiel</span>
+      <a href="agent.html">Espace agent</a>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/app.js"></script>
+</body>
+</html>
