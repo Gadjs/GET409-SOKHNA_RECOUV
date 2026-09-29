@@ -1,10 +1,10 @@
 /* Ndimbal — design system (voir cahier des charges) */
 
 :root {
-  --color-primary: #1565C0;
-  --color-primary-dark: #0D47A1;
+  --color-primary: #2B2B5E;
+  --color-primary-dark: #1C1C40;
   --color-secondary: #FFFFFF;
-  --color-accent: #F59E0B;
+  --color-accent: #D5A00A;
   --color-text: #1F2937;
   --color-muted: #6B7280;
   --bg-a: #FFFFFF;
@@ -303,7 +303,8 @@ nav.main-nav a[aria-current="page"]::after {
 /* ---------- hero ---------- */
 
 .hero {
-  padding: 48px 0 56px;
+  padding-top: 48px;
+  padding-bottom: 56px;
 }
 
 .hero-grid {
@@ -602,7 +603,8 @@ footer.site {
   position: relative;
   z-index: 1;
   color: var(--color-secondary);
-  padding: 22px 0;
+  padding-top: 22px;
+  padding-bottom: 22px;
   width: 100%;
 }
 
@@ -1097,7 +1099,7 @@ fieldset legend {
   gap: 16px;
 }
 
-.agent-main { padding: 28px 0 60px; }
+.agent-main { padding-top: 28px; padding-bottom: 60px; }
 
 .agent-counters {
   display: grid;
@@ -1197,4 +1199,22 @@ table.agent select {
     transition: none !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* ---------- identite NSIA (bleu #2B2B5E / jaune #D5A00A) ---------- */
+.header-actions .btn-primary,
+.mobile-menu__panel .btn-primary { background: var(--color-accent); color: var(--color-primary); }
+.header-actions .btn-primary:hover,
+.mobile-menu__panel .btn-primary:hover { background: #B88A08; }
+.section-head h2::after { content: ""; display: block; width: 48px; height: 3px; margin-top: 10px; background: var(--color-accent); border-radius: 2px; }
+.chiffre .valeur { color: var(--color-primary); }
+.chiffre .valeur::after { content: ""; display: block; width: 32px; height: 3px; margin: 8px auto 0; background: var(--color-accent); }
+footer.site { background: var(--color-primary); border-top: 0; }
+footer.site .footer-grid address, footer.site .footer-grid p, footer.site .footer-grid ul a, footer.site .footer-bottom, footer.site .footer-bottom a { color: rgba(255,255,255,.78); }
+footer.site .footer-grid h4 { color: var(--color-accent); }
+footer.site .footer-grid ul a:hover, footer.site .footer-bottom a:hover { color: #fff; }
+footer.site .footer-bottom { border-top-color: rgba(255,255,255,.18); }
+footer.site .footer-brand img { filter: brightness(0) invert(1); }
+@media (max-width: 767px) {
+  .header-actions .btn-primary { display: none; }
 }

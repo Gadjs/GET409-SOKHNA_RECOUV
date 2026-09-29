@@ -1,5 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Emplacement de l'image du produit NSIA Epargne">
-  <rect x="1" y="1" width="398" height="398" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="2" stroke-dasharray="10 6"/>
-  <text x="200" y="192" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#94A3B8">NSIA EPARGNE</text>
-  <text x="200" y="220" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#B0BEC9">image a remplacer</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="NSIA Épargne"><rect width="400" height="400" fill="#2B2B5E"/><circle cx="330" cy="70" r="110" fill="#D5A00A" opacity=".14"/><ellipse cx="200" cy="248" rx="54" ry="14" fill="#D5A00A"/><rect x="146" y="226" width="108" height="22" fill="#D5A00A"/><ellipse cx="200" cy="226" rx="54" ry="14" fill="#F2C94C"/><ellipse cx="200" cy="206" rx="54" ry="14" fill="#D5A00A"/><rect x="146" y="184" width="108" height="22" fill="#D5A00A"/><ellipse cx="200" cy="184" rx="54" ry="14" fill="#F2C94C"/><path d="M200 120 V156 M186 142 L200 156 L214 142" stroke="#fff" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>

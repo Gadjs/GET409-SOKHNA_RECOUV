@@ -1,5 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Emplacement de l'image du produit NSIA Etudes">
-  <rect x="1" y="1" width="398" height="398" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="2" stroke-dasharray="10 6"/>
-  <text x="200" y="192" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#94A3B8">NSIA ETUDES</text>
-  <text x="200" y="220" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#B0BEC9">image a remplacer</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="NSIA Études"><rect width="400" height="400" fill="#2B2B5E"/><circle cx="330" cy="70" r="110" fill="#D5A00A" opacity=".14"/><path d="M200 150 L270 182 L200 214 L130 182 Z" fill="#D5A00A"/><path d="M160 198 V236 C180 252 220 252 240 236 V198 L200 216 Z" fill="#fff"/><path d="M262 186 V230" stroke="#D5A00A" stroke-width="5" stroke-linecap="round"/></svg>

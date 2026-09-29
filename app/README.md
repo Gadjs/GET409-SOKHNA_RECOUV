@@ -15,7 +15,7 @@ Ouvrez `index.html` directement dans un navigateur, ou servez le dossier avec un
 
 ## À remplacer avant la mise en production
 
-Les images jointes n'ont pas pu être intégrées (aucun fichier reçu). Cinq images provisoires marquent l'emplacement exact — mêmes dimensions, mêmes usages (`object-fit: cover`, lazy loading, texte alternatif déjà en place) :
+Les visuels actuels sont des illustrations SVG aux couleurs NSIA (bleu #2B2B5E, jaune #D5A00A), en attendant les images officielles fournies par NSIA :
 
 - `assets/img/logo-nsia.svg` → logo NSIA Vie
 - `assets/img/banniere-hero.svg` → photo de bannière (hero Accueil + bannières fines Mes cotisations / Contact)

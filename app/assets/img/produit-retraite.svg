@@ -1,5 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Emplacement de l'image du produit NSIA Retraite">
-  <rect x="1" y="1" width="398" height="398" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="2" stroke-dasharray="10 6"/>
-  <text x="200" y="192" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#94A3B8">NSIA RETRAITE</text>
-  <text x="200" y="220" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#B0BEC9">image a remplacer</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="NSIA Retraite"><rect width="400" height="400" fill="#2B2B5E"/><circle cx="330" cy="70" r="110" fill="#D5A00A" opacity=".14"/><circle cx="200" cy="205" r="40" fill="#D5A00A"/><path d="M120 250 H280" stroke="#fff" stroke-width="6" stroke-linecap="round"/><path d="M150 270 H250" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity=".6"/><rect x="100" y="245" width="200" height="60" fill="#2B2B5E"/><path d="M120 250 H280" stroke="#fff" stroke-width="6" stroke-linecap="round"/><path d="M150 268 H250" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity=".6"/></svg>
