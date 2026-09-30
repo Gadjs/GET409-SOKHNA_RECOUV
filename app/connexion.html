@@ -13,11 +13,33 @@
 
 <div class="proto-bar">Prototype académique – GET409 Swiss UMEF – non officiel · connexion simulée</div>
 
-<div class="agent-shell">
-  <div class="agent-login">
-    <div class="agent-login-box">
-      <a class="brand" href="index.html"><img src="assets/img/logo-nsia.svg" alt="Logo NSIA Vie Assurances" loading="lazy"><span>Ndimbal</span></a>
-      <p style="text-align:center;color:var(--color-muted);font-size:.88rem;margin:-6px 0 4px">Espace assuré — mes contrats et cotisations</p>
+<div class="login-split">
+
+  <section class="login-hero" aria-label="Bienvenue">
+    <img class="login-hero__img" src="assets/img/banniere-hero.svg" alt="" aria-hidden="true">
+    <div class="login-hero__veil"></div>
+    <div class="login-hero__content">
+      <a class="login-hero__brand" href="index.html">
+        <img src="assets/img/logo-nsia.svg" alt="Logo NSIA Vie Assurances">
+        <span>Ndimbal</span>
+      </a>
+      <div class="login-hero__text">
+        <h1>BIENVENUE — DALAL AK JAMM</h1>
+        <p>Avec Ndimbal, vous êtes prévenu avant chaque échéance, en français ou en wolof, et vous payez par Wave, Orange Money ou en agence.</p>
+        <ul class="login-hero__points">
+          <li>Rappel dès J-3 avant l'échéance</li>
+          <li>Paiement Wave, Orange Money ou agence</li>
+          <li>Un conseiller NSIA quand vous en avez besoin</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="login-panel">
+    <div class="login-panel__box">
+      <p class="eyebrow">Espace assuré</p>
+      <h2>Connexion</h2>
+      <p class="login-panel__sub">Accédez à vos contrats et à vos cotisations.</p>
 
       <p class="connexion-message info" id="connexion-info" hidden></p>
       <p class="connexion-message erreur" id="connexion-erreur" role="alert" hidden>Numéro de téléphone ou mot de passe incorrect.</p>
@@ -31,7 +53,7 @@
           <label for="connexion-mdp">Mot de passe</label>
           <input type="password" id="connexion-mdp" required autocomplete="current-password">
         </div>
-        <button type="submit" class="btn btn-primary" style="width:100%">Se connecter</button>
+        <button type="submit" class="btn btn-primary login-panel__submit">Se connecter</button>
       </form>
 
       <p class="connexion-aide">Bientôt : connexion par numéro de téléphone et code reçu par SMS.</p>
@@ -39,9 +61,10 @@
         Mame Diarra Sarr — 77 123 45 67<br>
         Awa Ndiaye — 77 234 56 78<br>
         Fatou Diop — 76 345 67 89</p>
-      <p class="connexion-aide"><a href="index.html">← Retour à l'accueil</a></p>
+      <p class="connexion-aide"><a href="index.html">← Retour à l'accueil</a> · Besoin d'aide ? +221 33 889 60 20</p>
     </div>
-  </div>
+  </section>
+
 </div>
 
 <script src="assets/js/app.js"></script>
