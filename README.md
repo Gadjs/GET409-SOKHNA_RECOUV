@@ -54,7 +54,8 @@ ndimbal-nsia/
 │   ├── architecture.md          intégration à l'app NSIA existante
 │   ├── confidentialite.md       données personnelles et éthique
 │   └── assets/                  PDF et images
-└── prototype/                   prototype Python V0 + tests
+├── prototype/                   prototype Python V0 + tests
+└── app-lovable/                 app Lovable (TanStack Start + Supabase + Dify), voir LISEZMOI-VSCODE.md
 ```
 
 ## Prototype
