@@ -1,13 +1,156 @@
 /* Ndimbal — maquette statique : donnees de demonstration et interactions */
 
-const CONTRATS = [
-  { police: "POL001", assure: "Awa Ndiaye",    zone: "Parcelles Assainies, Dakar", produit: "NSIA Retraite", produitSlug: "retraite", prime: 25000, solde: 50000, statut: "retard" },
-  { police: "POL002", assure: "Fatou Diop",     zone: "Sacré-Cœur 3, Dakar",        produit: "NSIA Études",   produitSlug: "etudes",   prime: 30000, solde: 0,     statut: "ajour" },
-  { police: "POL003", assure: "Mariama Fall",   zone: "Keur Massar",                produit: "NSIA Épargne",  produitSlug: "epargne",  prime: 20000, solde: 0,     statut: "ajour" },
-  { police: "POL004", assure: "Khady Sow",      zone: "Médina, Dakar",              produit: "NSIA Études",   produitSlug: "etudes",   prime: 40000, solde: 80000, statut: "retard" },
-  { police: "POL007", assure: "Adama Diallo",   zone: "Randoulène, Thiès",          produit: "NSIA Retraite", produitSlug: "retraite", prime: 50000, solde: 0,     statut: "ajour" },
-  { police: "POL008", assure: "Rokhaya Fall",   zone: "Darou Khoudoss, Touba",      produit: "NSIA Épargne",  produitSlug: "epargne",  prime: 20000, solde: 60000, statut: "retard" },
+/* Comptes clients de demonstration (fictifs).
+   ATTENTION : dans cette maquette statique, les mots de passe et toutes les donnees
+   sont dans le navigateur. Ce n'est PAS une securite reelle : en production,
+   l'authentification et l'isolement des donnees se font cote serveur
+   (Supabase Auth + Row Level Security, voir supabase/schema.sql). */
+const CLIENTS = [
+  { id: "c01", nom: "Mame Diarra Sarr", telephone: "771234567", motDePasse: "ndimbal2026" },
+  { id: "c02", nom: "Awa Ndiaye",       telephone: "772345678", motDePasse: "ndimbal2026" },
+  { id: "c03", nom: "Fatou Diop",       telephone: "763456789", motDePasse: "ndimbal2026" },
 ];
+
+const CONTRATS = [
+  { clientId: "c01", police: "POL009", assure: "Mame Diarra Sarr", zone: "Grand Yoff, Dakar",   produit: "NSIA Études",   produitSlug: "etudes",   prime: 35000, solde: 35000, statut: "retard" },
+  { clientId: "c01", police: "POL010", assure: "Mame Diarra Sarr", zone: "Grand Yoff, Dakar",   produit: "NSIA Épargne",  produitSlug: "epargne",  prime: 15000, solde: 0,     statut: "ajour" },
+  { clientId: "c02", police: "POL001", assure: "Awa Ndiaye",    zone: "Parcelles Assainies, Dakar", produit: "NSIA Retraite", produitSlug: "retraite", prime: 25000, solde: 50000, statut: "retard" },
+  { clientId: "c03", police: "POL002", assure: "Fatou Diop",     zone: "Sacré-Cœur 3, Dakar",        produit: "NSIA Études",   produitSlug: "etudes",   prime: 30000, solde: 0,     statut: "ajour" },
+  { clientId: "c04", police: "POL003", assure: "Mariama Fall",   zone: "Keur Massar",                produit: "NSIA Épargne",  produitSlug: "epargne",  prime: 20000, solde: 0,     statut: "ajour" },
+  { clientId: "c05", police: "POL004", assure: "Khady Sow",      zone: "Médina, Dakar",              produit: "NSIA Études",   produitSlug: "etudes",   prime: 40000, solde: 80000, statut: "retard" },
+  { clientId: "c06", police: "POL007", assure: "Adama Diallo",   zone: "Randoulène, Thiès",          produit: "NSIA Retraite", produitSlug: "retraite", prime: 50000, solde: 0,     statut: "ajour" },
+  { clientId: "c07", police: "POL008", assure: "Rokhaya Fall",   zone: "Darou Khoudoss, Touba",      produit: "NSIA Épargne",  produitSlug: "epargne",  prime: 20000, solde: 60000, statut: "retard" },
+];
+
+/* ---------- session client (connexion simulee) ---------- */
+
+const SESSION_KEY = "ndimbal_session";
+const SESSION_DUREE_MAX = 15 * 60 * 1000; // deconnexion apres 15 min d'inactivite
+
+function lireSession() {
+  try {
+    const s = JSON.parse(sessionStorage.getItem(SESSION_KEY) || "null");
+    if (!s || !s.clientId) return null;
+    if (Date.now() - s.derniereActivite > SESSION_DUREE_MAX) {
+      sessionStorage.removeItem(SESSION_KEY);
+      return null;
+    }
+    return s;
+  } catch (e) {
+    return null;
+  }
+}
+
+function ecrireSession(clientId) {
+  try {
+    sessionStorage.setItem(SESSION_KEY, JSON.stringify({ clientId, derniereActivite: Date.now() }));
+  } catch (e) { /* stockage indisponible : la session ne survivra pas au changement de page */ }
+}
+
+function fermerSession(motif) {
+  try { sessionStorage.removeItem(SESSION_KEY); } catch (e) {}
+  const url = "connexion.html" + (motif ? "?motif=" + motif : "");
+  window.location.href = url;
+}
+
+function clientConnecte() {
+  const s = lireSession();
+  return s ? CLIENTS.find((c) => c.id === s.clientId) || null : null;
+}
+
+/* Contrats visibles : UNIQUEMENT ceux du client connecte */
+function contratsDuClient() {
+  const client = clientConnecte();
+  return client ? CONTRATS.filter((c) => c.clientId === client.id) : [];
+}
+
+function initSession() {
+  const protege = document.body.hasAttribute("data-protege");
+  const client = clientConnecte();
+
+  if (protege && !client) {
+    const page = window.location.pathname.split("/").pop() || "index.html";
+    window.location.replace("connexion.html?suite=" + encodeURIComponent(page));
+    return false;
+  }
+
+  if (!client) return true;
+
+  // bouton « Se deconnecter » dans l'en-tete et le menu mobile
+  const actions = document.querySelector(".header-actions");
+  if (actions && !actions.querySelector("[data-logout]")) {
+    const btn = document.createElement("button");
+    btn.className = "btn btn-ghost btn-sm btn-logout";
+    btn.setAttribute("data-logout", "");
+    btn.textContent = "Se déconnecter";
+    actions.insertBefore(btn, actions.querySelector(".burger"));
+  }
+  const panel = document.querySelector(".mobile-menu__panel");
+  if (panel && !panel.querySelector("[data-logout]")) {
+    const btn = document.createElement("button");
+    btn.className = "btn btn-ghost";
+    btn.setAttribute("data-logout", "");
+    btn.textContent = "Se déconnecter";
+    panel.appendChild(btn);
+  }
+  document.querySelectorAll("[data-logout]").forEach((b) => b.addEventListener("click", () => fermerSession("deconnexion")));
+
+  // suivi de l'activite + deconnexion automatique
+  let dernierEnregistrement = 0;
+  const activite = () => {
+    const now = Date.now();
+    if (now - dernierEnregistrement > 5000) {
+      dernierEnregistrement = now;
+      ecrireSession(client.id);
+    }
+  };
+  ["click", "keydown", "scroll", "touchstart", "mousemove"].forEach((ev) =>
+    window.addEventListener(ev, activite, { passive: true })
+  );
+  activite();
+  setInterval(() => {
+    if (!lireSession()) fermerSession("expiree");
+  }, 30000);
+
+  return true;
+}
+
+function initConnexion() {
+  const form = document.querySelector("#connexion-form");
+  if (!form) return;
+
+  const params = new URLSearchParams(window.location.search);
+  const suite = params.get("suite");
+  const destination = suite && /^[a-z-]+\.html$/.test(suite) ? suite : "cotisations.html";
+  const info = document.querySelector("#connexion-info");
+  const erreur = document.querySelector("#connexion-erreur");
+
+  if (clientConnecte()) {
+    window.location.replace(destination);
+    return;
+  }
+
+  const motif = params.get("motif");
+  if (info && motif === "expiree") info.textContent = "Votre session a expiré après 15 minutes d'inactivité. Reconnectez-vous.";
+  else if (info && motif === "deconnexion") info.textContent = "Vous êtes bien déconnecté(e).";
+  else if (info && suite) info.textContent = "Connectez-vous pour voir vos contrats et vos cotisations.";
+  if (info && info.textContent) info.hidden = false;
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const tel = form.querySelector("#connexion-tel").value.replace(/\D/g, "").replace(/^221/, "");
+    const mdp = form.querySelector("#connexion-mdp").value;
+    const client = CLIENTS.find((c) => c.telephone === tel && c.motDePasse === mdp);
+    if (!client) {
+      erreur.hidden = false;
+      form.querySelector("#connexion-mdp").value = "";
+      form.querySelector("#connexion-mdp").focus();
+      return;
+    }
+    ecrireSession(client.id);
+    window.location.href = destination;
+  });
+}
 
 const PRODUIT_IMG = {
   etudes: { src: "assets/img/produit-etudes.svg", alt: "Emplacement de l'image du produit NSIA Études" },
@@ -219,6 +362,11 @@ function renderCotisations() {
   const filterButtons = document.querySelectorAll(".filter-btn");
   let currentFilter = "tous";
 
+  const client = clientConnecte();
+  const MES_CONTRATS = contratsDuClient();
+  const note = document.querySelector(".demo-note");
+  if (note && client) note.textContent = `Connecté(e) : ${client.nom} · données de démonstration`;
+
   function statutPill(statut) {
     return statut === "ajour"
       ? '<span class="status-pill ok"><span class="dot"></span>À jour</span>'
@@ -226,7 +374,7 @@ function renderCotisations() {
   }
 
   function render() {
-    const list = CONTRATS.filter((c) => currentFilter === "tous" || c.produitSlug === currentFilter);
+    const list = MES_CONTRATS.filter((c) => currentFilter === "tous" || c.produitSlug === currentFilter);
     const img = (slug) => PRODUIT_IMG[slug];
 
     tbody.innerHTML = list
@@ -283,16 +431,16 @@ function renderCotisations() {
     countLabel.textContent = `${list.length} contrat${list.length > 1 ? "s" : ""}`;
 
     tbody.querySelectorAll("[data-payer]").forEach((btn) =>
-      btn.addEventListener("click", () => openPayerModal(CONTRATS.find((c) => c.police === btn.dataset.payer)))
+      btn.addEventListener("click", () => openPayerModal(MES_CONTRATS.find((c) => c.police === btn.dataset.payer)))
     );
     tbody.querySelectorAll("[data-promesse]").forEach((btn) =>
-      btn.addEventListener("click", () => openPromesseModal(CONTRATS.find((c) => c.police === btn.dataset.promesse)))
+      btn.addEventListener("click", () => openPromesseModal(MES_CONTRATS.find((c) => c.police === btn.dataset.promesse)))
     );
     cardsWrap.querySelectorAll("[data-payer]").forEach((btn) =>
-      btn.addEventListener("click", () => openPayerModal(CONTRATS.find((c) => c.police === btn.dataset.payer)))
+      btn.addEventListener("click", () => openPayerModal(MES_CONTRATS.find((c) => c.police === btn.dataset.payer)))
     );
     cardsWrap.querySelectorAll("[data-promesse]").forEach((btn) =>
-      btn.addEventListener("click", () => openPromesseModal(CONTRATS.find((c) => c.police === btn.dataset.promesse)))
+      btn.addEventListener("click", () => openPromesseModal(MES_CONTRATS.find((c) => c.police === btn.dataset.promesse)))
     );
   }
 
@@ -305,9 +453,9 @@ function renderCotisations() {
     });
   });
 
-  const enRetard = CONTRATS.filter((c) => c.statut === "retard").length;
-  const aJour = CONTRATS.filter((c) => c.statut === "ajour").length;
-  const totalDu = CONTRATS.reduce((sum, c) => sum + c.solde, 0);
+  const enRetard = MES_CONTRATS.filter((c) => c.statut === "retard").length;
+  const aJour = MES_CONTRATS.filter((c) => c.statut === "ajour").length;
+  const totalDu = MES_CONTRATS.reduce((sum, c) => sum + c.solde, 0);
   const elAJour = document.querySelector("#resume-ajour");
   const elRetard = document.querySelector("#resume-retard");
   const elTotal = document.querySelector("#resume-total");
@@ -496,6 +644,8 @@ function initAgentDashboard() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  if (!initSession()) return;
+  initConnexion();
   initHeaderScroll();
   initMobileMenu();
   initReveal();

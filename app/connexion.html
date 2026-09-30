@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ndimbal — connexion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<div class="proto-bar">Prototype académique – GET409 Swiss UMEF – non officiel · connexion simulée</div>
+
+<div class="agent-shell">
+  <div class="agent-login">
+    <div class="agent-login-box">
+      <a class="brand" href="index.html"><img src="assets/img/logo-nsia.svg" alt="Logo NSIA Vie Assurances" loading="lazy"><span>Ndimbal</span></a>
+      <p style="text-align:center;color:var(--color-muted);font-size:.88rem;margin:-6px 0 4px">Espace assuré — mes contrats et cotisations</p>
+
+      <p class="connexion-message info" id="connexion-info" hidden></p>
+      <p class="connexion-message erreur" id="connexion-erreur" role="alert" hidden>Numéro de téléphone ou mot de passe incorrect.</p>
+
+      <form id="connexion-form">
+        <div class="field">
+          <label for="connexion-tel">Numéro de téléphone</label>
+          <input type="tel" id="connexion-tel" required autocomplete="tel" inputmode="tel" placeholder="77 123 45 67">
+        </div>
+        <div class="field">
+          <label for="connexion-mdp">Mot de passe</label>
+          <input type="password" id="connexion-mdp" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%">Se connecter</button>
+      </form>
+
+      <p class="connexion-aide">Bientôt : connexion par numéro de téléphone et code reçu par SMS.</p>
+      <p class="demo-note">Démo, comptes fictifs (mot de passe <strong>ndimbal2026</strong>) :<br>
+        Mame Diarra Sarr — 77 123 45 67<br>
+        Awa Ndiaye — 77 234 56 78<br>
+        Fatou Diop — 76 345 67 89</p>
+      <p class="connexion-aide"><a href="index.html">← Retour à l'accueil</a></p>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/app.js"></script>
+</body>
+</html>

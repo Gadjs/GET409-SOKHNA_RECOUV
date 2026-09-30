@@ -1218,3 +1218,13 @@ footer.site .footer-brand img { filter: brightness(0) invert(1); }
 @media (max-width: 767px) {
   .header-actions .btn-primary { display: none; }
 }
+
+/* ---------- connexion client ---------- */
+@media (max-width: 767px) {
+  .header-actions .btn-logout { display: none; }
+}
+.connexion-message { font-size: .86rem; border-radius: var(--radius-sm); padding: 10px 12px; margin: 0; }
+.connexion-message.info { background: var(--bg-b); border: 1px solid var(--border); color: var(--color-text); }
+.connexion-message.erreur { background: #FEF2F2; border: 1px solid #FECACA; color: #B91C1C; }
+.connexion-aide { font-size: .8rem; color: var(--color-muted); text-align: center; margin: 0; }
+.connexion-aide a { color: var(--color-primary); }
