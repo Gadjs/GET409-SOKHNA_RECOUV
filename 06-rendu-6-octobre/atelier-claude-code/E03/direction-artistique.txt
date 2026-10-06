@@ -1,0 +1,9 @@
+Direction artistique de la V2 (landing-v2-frontend-design.html)
+
+Note : le texte original affiché par Claude Code n'avait pas été sauvegardé. Ces 5 lignes ont été rédigées après coup, à partir du code de la page.
+
+1. Typographie : Bricolage Grotesque (800) pour les titres, au caractère affirmé, et Atkinson Hyperlegible pour le texte, choisie pour sa lisibilité par tous les assurés.
+2. Palette : indigo #2B2B5E et doré « mangue » #D5A00A (couleurs NSIA Vie), sur un fond craie #F3F3F8, avec un vert feuille réservé aux confirmations.
+3. Mise en page : un hero en deux colonnes (message à gauche, quiz « Trouvez votre canal idéal » à droite), qui passe en une seule colonne sur mobile.
+4. Mouvement : un seul moment animé, l'aperçu du rappel qui arrive comme une bulle de message ; l'animation est désactivée si l'utilisateur préfère réduire les mouvements.
+5. Détail signature : un panneau « Dakar · Sandaga · Ndimbal » légèrement incliné, inspiré des enseignes du marché Sandaga, qui ancre la page dans Dakar.

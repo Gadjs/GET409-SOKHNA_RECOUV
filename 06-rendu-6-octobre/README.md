@@ -3,11 +3,11 @@ Sokhna Awa Gadiaga – Master 1, Swiss UMEF Dakar
 
 Ce dossier contient les trois éléments demandés :
 
-## 1. Atelier Claude Code (dossier `1-Atelier-Claude-Code`)
+## 1. Atelier Claude Code (dossier `1-Atelier-Claude-Code`, ou `atelier-claude-code` sur GitHub)
 Épisodes E00 à E14, un dossier par épisode avec les captures et les fichiers produits.
 Le fichier « Mot d'accompagnement.md » explique les adaptations et les points à signaler.
 
-## 2. Application Ndimbal mise à jour (dossier `2-Application-Ndimbal`)
+## 2. Application Ndimbal mise à jour (dossier `2-Application-Ndimbal`, ou `application-ndimbal` sur GitHub)
 - Version de référence (Cloudflare Workers) : https://pixel-perfect-render-8463.gadiagasokhnaawa28.workers.dev
 - Version Lovable : https://pixel-perfect-render-8463.lovable.app
 - Compte de démonstration (données fictives) : mame.diarra@ndimbal.test / Ndimbal2026!
@@ -17,7 +17,7 @@ Le fichier « Mot d'accompagnement.md » explique les adaptations et les points 
 ## Code de RecouvIA (projet fil rouge de l'atelier)
 - https://github.com/Gadjs/RecouvIA
 
-## 3. Vidéo de présentation (dossier `3-Video-presentation`)
+## 3. Vidéo de présentation (dossier `3-Video-presentation`, ou `video-presentation` sur GitHub)
 - `Ndimbal_pub_J-3.mp4` : publicité de 60 s au format vertical 9:16 (1080 × 1920).
 - `Dossier-de-production-video-Ndimbal.pdf` : fiche app, concept, découpage, bible de l'agent Google Flow, prompts et post-production.
 

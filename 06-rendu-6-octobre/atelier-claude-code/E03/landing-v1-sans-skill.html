@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ndimbal – Votre assurance vie, à jour sans effort</title>
+<meta name="description" content="Ndimbal : un assistant multicanal pour aider les assurés à rester à jour sur leurs primes. Projet étudiant.">
+<style>
+  :root {
+    --bg: #fbf8f3;
+    --surface: #ffffff;
+    --ink: #1f2a2e;
+    --muted: #5a666b;
+    --accent: #0f6b5c;
+    --accent-dark: #0a4f44;
+    --accent-soft: #e2f1ed;
+    --warm: #d98a1f;
+    --line: #e2dcd0;
+    --error: #b3261e;
+    --radius: 12px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.55;
+  }
+  h1, h2, h3 { line-height: 1.2; margin: 0 0 .5em; }
+  p { margin: 0 0 1em; }
+  a { color: var(--accent-dark); }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+  section { padding: 56px 0; }
+  section h2 { font-size: 1.7rem; }
+  .lead { color: var(--muted); max-width: 60ch; }
+
+  header.top { background: var(--surface); border-bottom: 1px solid var(--line); }
+  header.top .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; padding-top: 12px; padding-bottom: 12px; }
+  .brand { font-weight: 800; font-size: 1.2rem; color: var(--accent-dark); letter-spacing: .02em; }
+  nav { display: flex; flex-wrap: wrap; gap: 4px 16px; }
+  nav a { text-decoration: none; font-size: .95rem; color: var(--ink); }
+  nav a:hover { text-decoration: underline; }
+
+  .hero { background: linear-gradient(160deg, var(--accent-soft), var(--bg) 70%); padding: 72px 0 64px; }
+  .hero h1 { font-size: clamp(2.4rem, 9vw, 4rem); color: var(--accent-dark); margin-bottom: .2em; }
+  .hero .tagline { font-size: clamp(1.1rem, 4.5vw, 1.5rem); margin-bottom: 1em; }
+  .hero p.sub { color: var(--muted); max-width: 58ch; }
+
+  .btn {
+    display: inline-block; border: 0; cursor: pointer; font: inherit; font-weight: 600;
+    background: var(--accent); color: #fff; padding: 12px 22px; border-radius: 999px; text-decoration: none;
+  }
+  .btn:hover { background: var(--accent-dark); }
+  .btn.secondary { background: transparent; color: var(--accent-dark); border: 2px solid var(--accent); padding: 10px 20px; }
+  .btn.secondary:hover { background: var(--accent-soft); }
+  .btn:focus-visible, input:focus-visible, textarea:focus-visible, .option:focus-within { outline: 3px solid var(--warm); outline-offset: 2px; }
+
+  /* Quiz */
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+  .quiz { max-width: 640px; }
+  .progress { display: flex; gap: 6px; margin-bottom: 16px; }
+  .progress span { flex: 1; height: 6px; border-radius: 3px; background: var(--line); }
+  .progress span.done { background: var(--accent); }
+  .step-label { font-size: .85rem; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 4px; }
+  fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+  legend { font-size: 1.2rem; font-weight: 700; padding: 0; margin-bottom: 12px; }
+  .options { display: grid; gap: 10px; }
+  .option { display: block; position: relative; }
+  .option input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+  .option span {
+    display: block; padding: 14px 16px; border: 2px solid var(--line); border-radius: var(--radius); background: var(--bg);
+  }
+  .option:hover span { border-color: var(--accent); }
+  .option input:checked + span { border-color: var(--accent); background: var(--accent-soft); font-weight: 600; }
+  .quiz-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+  .btn[disabled] { opacity: .45; cursor: not-allowed; }
+  .result h3 { font-size: 1.3rem; color: var(--accent-dark); }
+  .result ul { padding-left: 1.2em; margin: 0 0 1em; }
+  .result li { margin-bottom: .4em; }
+  .note { font-size: .85rem; color: var(--muted); }
+
+  /* Grids */
+  .grid { display: grid; gap: 16px; grid-template-columns: 1fr; margin-top: 24px; }
+  @media (min-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 900px) { .grid.three { grid-template-columns: repeat(3, 1fr); } .grid.four { grid-template-columns: repeat(4, 1fr); } }
+  .service .icon { display: inline-flex; width: 44px; height: 44px; border-radius: 50%; background: var(--accent-soft); color: var(--accent-dark); align-items: center; justify-content: center; font-weight: 800; margin-bottom: 10px; }
+  .service h3 { font-size: 1.1rem; }
+  .service p { color: var(--muted); font-size: .95rem; margin: 0; }
+  .alt { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .placeholder { border: 2px dashed var(--line); background: var(--bg); border-radius: var(--radius); padding: 20px; min-height: 140px; }
+  .placeholder .tag { display: inline-block; font-size: .75rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; background: #fbe9c9; color: #7a4a05; padding: 2px 8px; border-radius: 4px; margin-bottom: 8px; }
+  .placeholder h3 { font-size: 1rem; color: var(--muted); }
+  .placeholder p { color: var(--muted); font-size: .9rem; margin: 0; }
+
+  /* Form */
+  form { max-width: 640px; }
+  .field { margin-bottom: 16px; }
+  label { display: block; font-weight: 600; margin-bottom: 4px; }
+  input[type=text], input[type=tel], textarea {
+    width: 100%; font: inherit; padding: 11px 12px; border: 1px solid #b9b2a3; border-radius: 8px; background: #fff; color: var(--ink);
+  }
+  textarea { min-height: 120px; resize: vertical; }
+  .field.invalid input, .field.invalid textarea { border-color: var(--error); }
+  .err { color: var(--error); font-size: .85rem; min-height: 1.2em; margin-top: 4px; }
+  .hint { font-size: .85rem; color: var(--muted); font-weight: 400; }
+  .form-status { margin-top: 16px; padding: 12px 14px; border-radius: 8px; background: var(--accent-soft); color: var(--accent-dark); }
+
+  footer { background: #17252a; color: #d7dedf; padding: 32px 0; font-size: .9rem; }
+  footer strong { color: #fff; }
+  footer p { margin: 0 0 .5em; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <span class="brand">Ndimbal</span>
+    <nav aria-label="Navigation principale">
+      <a href="#quiz">Mon canal idéal</a>
+      <a href="#services">Services</a>
+      <a href="#cas">Cas d'usage</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="accueil">
+    <div class="wrap">
+      <h1>Ndimbal</h1>
+      <p class="tagline"><strong>Votre assurance vie, à jour sans effort</strong></p>
+      <p class="sub">Un assistant multicanal qui aide les assurés NSIA Vie Assurances à ne plus oublier le paiement de leurs primes : rappels par SMS, appels automatisés, assistant vocal en français et en wolof, chatbot et conseiller humain.</p>
+      <p><a class="btn" href="#quiz">Trouver mon canal idéal</a></p>
+    </div>
+  </section>
+
+  <section id="quiz">
+    <div class="wrap">
+      <h2>Mon canal idéal</h2>
+      <p class="lead">Trois questions pour obtenir une proposition de rappel adaptée à votre situation.</p>
+
+      <div class="card quiz" id="quizCard" aria-live="polite">
+        <div class="progress" aria-hidden="true"><span id="p1"></span><span id="p2"></span><span id="p3"></span></div>
+        <div id="quizBody"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="alt">
+    <div class="wrap">
+      <h2>Nos services</h2>
+      <p class="lead">Quatre façons de rester informé de vos échéances, selon vos habitudes.</p>
+      <div class="grid four">
+        <article class="card service">
+          <div class="icon" aria-hidden="true">SMS</div>
+          <h3>Rappels par SMS</h3>
+          <p>Un message court avant l'échéance de votre prime, directement sur votre téléphone.</p>
+        </article>
+        <article class="card service">
+          <div class="icon" aria-hidden="true">Tél</div>
+          <h3>Appels automatisés</h3>
+          <p>Un appel vocal pour vous rappeler l'échéance, sans avoir à lire un message.</p>
+        </article>
+        <article class="card service">
+          <div class="icon" aria-hidden="true">Voix</div>
+          <h3>Assistant vocal français / wolof</h3>
+          <p>Posez vos questions à voix haute dans la langue qui vous est la plus naturelle.</p>
+        </article>
+        <article class="card service">
+          <div class="icon" aria-hidden="true">Chat</div>
+          <h3>Chatbot &amp; conseiller</h3>
+          <p>Un chatbot pour les questions courantes, et un conseiller humain quand vous en avez besoin.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="cas">
+    <div class="wrap">
+      <h2>Cas d'usage</h2>
+      <p class="lead">Les scénarios ci-dessous seront rédigés ultérieurement. Il s'agit d'emplacements réservés, sans contenu réel.</p>
+      <div class="grid three" id="casGrid"></div>
+    </div>
+  </section>
+
+  <section id="contact" class="alt">
+    <div class="wrap">
+      <h2>Contact</h2>
+      <p class="lead">Une question sur le projet ? Écrivez-nous. Ce formulaire est une maquette : aucune donnée n'est envoyée ni enregistrée.</p>
+      <form id="contactForm" novalidate>
+        <div class="field">
+          <label for="name">Nom complet</label>
+          <input type="text" id="name" name="name" autocomplete="name" aria-describedby="name-err">
+          <div class="err" id="name-err"></div>
+        </div>
+        <div class="field">
+          <label for="phone">Téléphone <span class="hint">(ex. 77 000 00 00)</span></label>
+          <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel" aria-describedby="phone-err">
+          <div class="err" id="phone-err"></div>
+        </div>
+        <div class="field">
+          <label for="policy">Numéro de police</label>
+          <input type="text" id="policy" name="policy" aria-describedby="policy-err">
+          <div class="err" id="policy-err"></div>
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" aria-describedby="message-err"></textarea>
+          <div class="err" id="message-err"></div>
+        </div>
+        <button class="btn" type="submit">Envoyer</button>
+        <div class="form-status" id="formStatus" role="status" hidden></div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong>Projet étudiant – non officiel</strong></p>
+    <p>Ndimbal est un projet académique de Master 1 (Swiss UMEF, Dakar). Il n'est ni édité, ni validé par NSIA Vie Assurances.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ---------- Quiz ---------- */
+  var steps = [
+    { key: 'contrat', title: 'Quel est votre type de contrat ?', options: ['Études', 'Retraite', 'Épargne'] },
+    { key: 'canal', title: 'Quel canal préférez-vous pour être rappelé ?', options: ['SMS', 'Appel automatique', 'Chatbot WhatsApp', 'Conseiller'] },
+    { key: 'langue', title: 'Dans quelle langue ?', options: ['Français', 'Wolof'] }
+  ];
+  var answers = {};
+  var current = 0;
+  var body = document.getElementById('quizBody');
+  var bars = [document.getElementById('p1'), document.getElementById('p2'), document.getElementById('p3')];
+
+  function el(tag, attrs, text) {
+    var e = document.createElement(tag);
+    if (attrs) Object.keys(attrs).forEach(function (k) {
+      if (k === 'class') e.className = attrs[k]; else e.setAttribute(k, attrs[k]);
+    });
+    if (text) e.textContent = text;
+    return e;
+  }
+
+  function setProgress(n) {
+    bars.forEach(function (b, i) { b.className = i < n ? 'done' : ''; });
+  }
+
+  function renderStep() {
+    var s = steps[current];
+    body.innerHTML = '';
+    setProgress(current);
+    body.appendChild(el('div', { 'class': 'step-label' }, 'Étape ' + (current + 1) + ' sur ' + steps.length));
+    var fs = el('fieldset');
+    fs.appendChild(el('legend', null, s.title));
+    var opts = el('div', { 'class': 'options' });
+    s.options.forEach(function (o, i) {
+      var lab = el('label', { 'class': 'option' });
+      var inp = el('input', { type: 'radio', name: s.key, value: o });
+      if (answers[s.key] === o) inp.checked = true;
+      inp.addEventListener('change', function () { answers[s.key] = o; next.disabled = false; });
+      lab.appendChild(inp);
+      lab.appendChild(el('span', null, o));
+      opts.appendChild(lab);
+    });
+    fs.appendChild(opts);
+    body.appendChild(fs);
+
+    var actions = el('div', { 'class': 'quiz-actions' });
+    if (current > 0) {
+      var back = el('button', { type: 'button', 'class': 'btn secondary' }, 'Retour');
+      back.addEventListener('click', function () { current--; renderStep(); });
+      actions.appendChild(back);
+    }
+    var next = el('button', { type: 'button', 'class': 'btn' }, current === steps.length - 1 ? 'Voir ma recommandation' : 'Suivant');
+    next.disabled = !answers[s.key];
+    next.addEventListener('click', function () {
+      if (!answers[s.key]) return;
+      if (current < steps.length - 1) { current++; renderStep(); } else { renderResult(); }
+    });
+    actions.appendChild(next);
+    body.appendChild(actions);
+  }
+
+  var canalText = {
+    'SMS': { titre: 'Rappels par SMS', detail: 'Un SMS de rappel vous est envoyé avant l\'échéance de votre prime.' },
+    'Appel automatique': { titre: 'Appel automatisé', detail: 'Un appel vocal automatique vous rappelle l\'échéance de votre prime.' },
+    'Chatbot WhatsApp': { titre: 'Chatbot WhatsApp', detail: 'Vous recevez et consultez vos rappels dans une conversation WhatsApp.' },
+    'Conseiller': { titre: 'Conseiller humain', detail: 'Un conseiller vous contacte pour faire le point sur votre prime.' }
+  };
+  var contratText = {
+    'Études': 'Votre contrat Études : une prime à jour aide à préserver le projet de formation prévu.',
+    'Retraite': 'Votre contrat Retraite : une prime à jour aide à préserver votre projet de retraite.',
+    'Épargne': 'Votre contrat Épargne : une prime à jour aide à maintenir votre effort d\'épargne.'
+  };
+
+  function renderResult() {
+    setProgress(3);
+    body.innerHTML = '';
+    var c = canalText[answers.canal];
+    var wolof = answers.langue === 'Wolof';
+    var box = el('div', { 'class': 'result' });
+    box.appendChild(el('div', { 'class': 'step-label' }, 'Votre configuration recommandée'));
+    box.appendChild(el('h3', null, c.titre + ' en ' + answers.langue.toLowerCase()));
+    var ul = el('ul');
+    [
+      'Contrat : ' + answers.contrat,
+      'Canal : ' + answers.canal,
+      'Langue : ' + answers.langue
+    ].forEach(function (t) { ul.appendChild(el('li', null, t)); });
+    box.appendChild(ul);
+    box.appendChild(el('p', null, contratText[answers.contrat]));
+    box.appendChild(el('p', null, c.detail));
+    if (wolof) {
+      box.appendChild(el('p', null, 'Pour le wolof, l\'assistant vocal est le canal le plus naturel : vous pouvez aussi le demander en complément.'));
+    }
+    box.appendChild(el('p', { 'class': 'note' }, 'Recommandation indicative issue d\'un projet étudiant ; elle n\'engage pas NSIA Vie Assurances.'));
+    var actions = el('div', { 'class': 'quiz-actions' });
+    var again = el('button', { type: 'button', 'class': 'btn secondary' }, 'Recommencer');
+    again.addEventListener('click', function () { answers = {}; current = 0; renderStep(); });
+    var contact = el('a', { 'class': 'btn', href: '#contact' }, 'Nous contacter');
+    actions.appendChild(again);
+    actions.appendChild(contact);
+    box.appendChild(actions);
+    body.appendChild(box);
+  }
+
+  renderStep();
+
+  /* ---------- Cas d'usage (placeholders) ---------- */
+  var grid = document.getElementById('casGrid');
+  for (var i = 1; i <= 6; i++) {
+    var card = el('article', { 'class': 'placeholder' });
+    card.appendChild(el('span', { 'class': 'tag' }, 'Emplacement réservé'));
+    card.appendChild(el('h3', null, '[Cas d\'usage à venir] n° ' + i));
+    card.appendChild(el('p', null, '[Description à venir]'));
+    grid.appendChild(card);
+  }
+
+  /* ---------- Formulaire ---------- */
+  var form = document.getElementById('contactForm');
+  var status = document.getElementById('formStatus');
+
+  var rules = {
+    name: function (v) { return v.length >= 2 ? '' : 'Veuillez saisir votre nom (2 caractères minimum).'; },
+    phone: function (v) {
+      var digits = v.replace(/[\s.\-()]/g, '');
+      return /^\+?\d{8,15}$/.test(digits) ? '' : 'Numéro invalide : 8 à 15 chiffres attendus.';
+    },
+    policy: function (v) { return /^[A-Za-z0-9\/\-]{4,}$/.test(v) ? '' : 'Numéro de police invalide (4 caractères minimum, lettres, chiffres, / ou -).'; },
+    message: function (v) { return v.length >= 10 ? '' : 'Votre message doit contenir au moins 10 caractères.'; }
+  };
+
+  function check(id) {
+    var input = document.getElementById(id);
+    var msg = rules[id](input.value.trim());
+    document.getElementById(id + '-err').textContent = msg;
+    input.parentNode.classList.toggle('invalid', !!msg);
+    input.setAttribute('aria-invalid', msg ? 'true' : 'false');
+    return !msg;
+  }
+
+  Object.keys(rules).forEach(function (id) {
+    document.getElementById(id).addEventListener('blur', function () { check(id); });
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    status.hidden = true;
+    var firstBad = null;
+    Object.keys(rules).forEach(function (id) {
+      if (!check(id) && !firstBad) firstBad = id;
+    });
+    if (firstBad) { document.getElementById(firstBad).focus(); return; }
+    status.textContent = 'Merci ! Votre message a été validé. (Maquette : aucune donnée n\'a été envoyée.)';
+    status.hidden = false;
+    form.reset();
+  });
+})();
+</script>
+</body>
+</html>

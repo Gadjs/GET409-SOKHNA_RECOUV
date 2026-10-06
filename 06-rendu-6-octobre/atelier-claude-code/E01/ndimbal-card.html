@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ndimbal – Carte du projet</title>
+<style>
+  :root { --navy: #2B2B5E; --gold: #D5A00A; --bg: #f4f2ec; --ink: #1d1d3a; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 16px;
+    background: var(--bg);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    color: var(--ink);
+  }
+  .card {
+    width: 100%; max-width: 440px;
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 28px rgba(43, 43, 94, .18);
+  }
+  header {
+    background: var(--navy);
+    color: #fff;
+    padding: 28px 24px 24px;
+    border-bottom: 5px solid var(--gold);
+  }
+  h1 { font-size: 2rem; letter-spacing: .5px; color: var(--gold); }
+  .pitch { margin-top: 8px; font-size: 1rem; line-height: 1.45; }
+  main { padding: 22px 24px 8px; }
+  h2 {
+    font-size: .75rem; text-transform: uppercase; letter-spacing: 1.5px;
+    color: var(--navy); margin-bottom: 10px;
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin-bottom: 22px; }
+  .tags li {
+    background: var(--navy); color: #fff;
+    border-left: 4px solid var(--gold);
+    padding: 7px 12px; border-radius: 6px;
+    font-size: .88rem;
+  }
+  .contact {
+    background: #faf6e8; border: 1px solid var(--gold);
+    border-radius: 10px; padding: 12px 14px; margin-bottom: 20px;
+    font-size: .95rem; word-break: break-word;
+  }
+  .contact a { color: var(--navy); font-weight: 600; }
+  footer {
+    background: var(--navy); color: var(--gold);
+    text-align: center; font-size: .8rem; padding: 12px 16px;
+  }
+  @media (max-width: 380px) {
+    h1 { font-size: 1.7rem; }
+    header, main { padding-left: 16px; padding-right: 16px; }
+  }
+</style>
+</head>
+<body>
+  <article class="card">
+    <header>
+      <h1>Ndimbal</h1>
+      <p class="pitch">Un assistant multicanal qui aide les assurés à rester à jour dans le paiement de leurs primes.</p>
+    </header>
+    <main>
+      <h2>Services</h2>
+      <ul class="tags">
+        <li>Rappels SMS</li>
+        <li>Appels automatisés</li>
+        <li>Assistant vocal FR/Wolof</li>
+        <li>Chatbot</li>
+      </ul>
+      <h2>Contact</h2>
+      <div class="contact">
+        <a href="mailto:prenom.nom@exemple.com">prenom.nom@exemple.com</a>
+      </div>
+    </main>
+    <footer>Projet étudiant – non officiel</footer>
+  </article>
+</body>
+</html>
